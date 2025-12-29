@@ -1,565 +1,534 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Properties for Sale in Zambia | Leaf-Note Real Estate</title>
     <meta name="description" content="Browse available residential properties, commercial real estate, and plots of land for sale in Ndola, Kitwe, Lusaka, and across Zambia.">
-    <meta name="author" content="Leaf-Note Financial Services & Real Estate Ltd">
 
-    <meta property="og:title" content="Properties for Sale in Zambia | Leaf-Note">
-    <meta property="og:description" content="Find your next property with Leaf-Note. We have listings in Ndola, Kitwe, Lusaka, and more.">
-    <meta property="og:image" content="/images/properties/Logo.webp">
-    <meta property="og:url" content="https://leaf-note.com/properties">
-    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="icon" href="/images/properties/Logo.webp" type="image/webp">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #374151; /* text-gray-700 */
+        }
+
+        .nav-link.active {
+            color: #3b82f6; /* text-blue-500 */
+            font-weight: 600;
+        }
+        /* Style for Leaflet map container */
+        #mapid {
+            height: 450px;
+            border-radius: 0.5rem; /* rounded-lg */
+            z-index: 10;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 0.5rem;
+        }
+
+        .leaflet-popup-content h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .leaflet-popup-content a {
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+<body class="bg-gray-50">
+
+    <header class="bg-white shadow-sm">
+        <div class="border-b border-gray-200">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2">
+                <div class="flex items-center space-x-6 text-sm text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-phone-alt text-gray-500"></i>
                         <span>+260 95 586 9020</span>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-envelope text-gray-500"></i>
                         <span>info@leaf-note.com</span>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-map-marker-alt text-gray-500"></i>
                         <span>Ndola, Zambia</span>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <div class="flex items-center space-x-4 text-gray-600">
+                    <a href="javascript:void(0);" aria-label="Facebook" class="hover:text-blue-600"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/260955869020" aria-label="WhatsApp" class="hover:text-blue-600"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
 
-        <nav class="sticky-nav" id="mainNav">
-            <div class="container">
-                <div class="nav-container">
-                    <a href="index.html" class="logo-container">
-                        <img src="/images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
-                        <div class="logo-text">
-                            <h1>Leaf-Note</h1>
-                            <p>Financial Services & Real Estate Ltd</p>
-                        </div>
-                    </a>
-
-                    <div class="nav-links">
-                        <a href="index.html" class="nav-link">Home</a>
-                        <a href="#services" class="nav-link">Services</a>
-                        <a href="properties.html" class="nav-link active">Properties</a> <a href="#contact" class="nav-link">Contact</a>
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8" id="mainNav">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" class="h-12 w-12">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">Leaf-Note</h1>
+                        <p class="text-xs text-gray-500">Financial Services & Real Estate Ltd</p>
                     </div>
+                </a>
 
-                    <button class="mobile-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
-                        <i class="fas fa-bars"></i>
-                        <span class="sr-only">Menu</span>
-                    </button>
-                </div>
-
-                <div class="mobile-menu" id="mobileMenu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="#services" class="nav-link">Services</a>
+                <div class="hidden md:flex items-center space-x-8 text-gray-700">
+                    <a href="index.html" class="nav-link hover:text-blue-500">Home</a>
+                    <a href="#services" class="nav-link hover:text-blue-500">Services</a>
                     <a href="properties.html" class="nav-link active">Properties</a>
-                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#contact" class="nav-link hover:text-blue-500">Contact</a>
                 </div>
+
+                <button class="md:hidden text-2xl" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                    <span class="sr-only">Menu</span>
+                </button>
+            </div>
+
+            <div class="hidden md:hidden" id="mobileMenu">
+                <a href="index.html" class="nav-link block py-3 px-4 hover:bg-gray-100">Home</a>
+                <a href="#services" class="nav-link block py-3 px-4 hover:bg-gray-100">Services</a>
+                <a href="properties.html" class="nav-link active block py-3 px-4 bg-blue-50">Properties</a>
+                <a href="#contact" class="nav-link block py-3 px-4 hover:bg-gray-100">Contact</a>
             </div>
         </nav>
     </header>
 
+
     <main>
-        <section class="page-header">
-            <div class="container">
-                <h1>Our Properties</h1>
-                <p>Find your ideal plot of land or home in Zambia</p>
+        <section id="featured-estate" class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="images/properties/featured-estate-spring-view.webp" alt="Spring View Luxurious Estate Land" class="rounded-lg w-full h-auto object-cover">
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold uppercase text-blue-600 mb-3">Now Selling</h2>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-5">Spring View Luxurious Estate</h1>
+                        <p class="text-base text-gray-600 mb-6">
+                            Secure your future in Ndola's premier new development. Spring View offers a secure, modern, and environmentally friendly community with a range of plots to suit your vision, from affordable starter plots to executive-sized residential and commercial stands.
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center space-x-3 text-gray-700">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span>Flexible payment plans available.</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-gray-700">
+                                <i class="fas fa-store text-green-500"></i>
+                                <span>Zoned for commercial shops and social facilities.</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-gray-700">
+                                <i class="fas fa-leaf text-green-500"></i>
+                                <span>Beautiful, environmentally friendly design.</span>
+                            </li>
+                        </ul>
+                        <a href="#properties" class="inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-md text-base hover:bg-blue-700 transition duration-300">
+                            View Available Plots
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
-
-        <section class="properties-section" id="properties">
-            <div class="container">
-                <div class="filter-container">
-                    <div class="filter-grid">
-                        <select id="filter-type" class="filter-select">
-                            <option value="">All Property Types</option>
-                            <option value="residential">Residential</option>
-                            <option value="land">Land</option>
-                        </select>
-
-                        <select id="filter-price" class="filter-select">
-                            <option value="">Any Price Range</option>
-                            <option value="0-50000">Under ZMW 50,000</option>
-                            <option value="50000-100000">ZMW 50K - 100K</option>
-                            <option value="100000-200000">ZMW 100K - 200K</option>
-                            <option value="200000-500000">ZMW 200K - 500K</option>
-                            <option value="500000+">ZMW 500K+</option>
-                        </select>
-
-                        <select id="filter-location" class="filter-select">
-                            <option value="">All Locations</option>
-                            <option value="ndola">Ndola</option>
-                            <option value="kitwe">Kitwe</option>
-                            <option value="lusaka">Lusaka</option>
-                        </select>
-
-                        <button class="btn btn-primary" onclick="filterProperties()">
-                            <i class="fas fa-search"></i> Search
+        <section id="properties" class="py-16 lg:py-20 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Available Properties</h2>
+                    <p class="mt-2 text-lg text-gray-600">Find your ideal plot of land or home</p>
+                </div>
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-md mb-12 max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div>
+                            <label for="filter-type" class="sr-only">Property Type</label>
+                            <select id="filter-type" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">All Property Types</option>
+                                <option value="land">Land</option>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-price" class="sr-only">Price Range</label>
+                            <select id="filter-price" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Any Price Range</option>
+                                <option value="0-50000">Under 50,000</option>
+                                <option value="50000-100000">50K - 100K</option>
+                                <option value="100000-200000">100K - 200K</option>
+                                <option value="200000-500000">200K - 500K</option>
+                                <option value="500000-9999999">500K+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-location" class="sr-only">Location</label>
+                            <select id="filter-location" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">All Locations</option>
+                                <option value="ndola">Ndola</option>
+                                <option value="kitwe">Kitwe</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <button id="filter-button" class="w-full md:w-auto bg-blue-600 text-white font-bold py-3 px-12 rounded-md hover:bg-blue-700 transition duration-300 flex items-center justify-center space-x-2">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
                         </button>
-                    </div>
-                    <div class="filter-results" id="filterResults">
-                        Showing <span id="visible-count">8</span> of <span id="total-count">8</span> properties
+                        <div id="filter-results" class="text-sm text-gray-600 mt-6 text-center">
+                            Showing <span id="visible-count" class="font-semibold">0</span> of <span id="total-count" class="font-semibold">0</span> properties.
+                        </div>
                     </div>
                 </div>
 
-                <div class="properties-grid">
-                    <div class="property-card" data-type="land" data-price="50000" data-location="ndola">
-                        <img class="property-image" src="/images/properties/minsundu_plot.webp" alt="Minsundu Plot 20x30">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Minsundu Plot 20x30</h3>
-                                <span class="property-tag">Land</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Minsundu, Ndola</span>
-                            </div>
-                            <div class="property-price">ZMW 50,000</div>
-                            <div class="property-meta">Plot Size: 600m² • Title Deeds Available</div>
-                            <div class="property-footer">
-                                <a class="plan-link" onclick="showPaymentPlan('20x30')">View Payment Plan</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="land" data-price="60000" data-location="ndola">
-                        <img class="property-image" src="/images/properties/minsundu_plot 30x30.webp" alt="Minsundu Plot 30x30">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Minsundu Plot 30x30</h3>
-                                <span class="property-tag">Land</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Minsundu, Ndola</span>
-                            </div>
-                            <div class="property-price">ZMW 60,000</div>
-                            <div class="property-meta">Plot Size: 900m² • Cash Price</div>
-                            <div class="property-footer">
-                                <a class="plan-link" onclick="showPaymentPlan('30x30')">View Payment Plan</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="land" data-price="130000" data-location="ndola">
-                        <img class="property-image" src="/images/properties/dola-hill-plot.webp" alt="Dola Hill Plot">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Dola Hill Plot</h3>
-                                <span class="property-tag">Land</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Dola Hill, Ndola</span>
-                            </div>
-                            <div class="property-price">ZMW 130,000</div>
-                            <div class="property-meta">Plot Size: 600m² (30m x 20m)</div>
-                            <div class="property-footer">
-                                <a class="plan-link" onclick="showPaymentPlan('dola-hill')">View Payment Plan</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="residential" data-price="850000" data-location="ndola">
-                        <img class="property-image" src="/images/properties/ndola-cbd-flat.webp" alt="Flat in Ndola CBD">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Flat with Large Yard</h3>
-                                <span class="property-tag accent">For Sale</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Ndola CBD, Zambia</span>
-                            </div>
-                            <div class="property-price">Price on Application</div>
-                            <div class="property-meta">
-                                <i class="fas fa-bed"></i> 2 Beds • <i class="fas fa-bath"></i> 1 Bath • Spacious Private Yard
-                            </div>
-                            <div class="property-footer">
-                                <a href="#contact" class="plan-link">Request Viewing</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="residential" data-price="650000" data-location="kitwe">
-                        <div class="property-image placeholder">3-Bedroom House, Parklands</div>
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Modern Family Home</h3>
-                                <span class="property-tag accent">New Listing</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Parklands, Kitwe</span>
-                            </div>
-                            <div class="property-price">ZMW 650,000</div>
-                            <div class="property-meta">
-                                <i class="fas fa-bed"></i> 3 Beds • <i class="fas fa-bath"></i> 2 Baths • Walled with Electric Fence
-                            </div>
-                            <div class="property-footer">
-                                <a href="#contact" class="plan-link">Request Viewing</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="land" data-price="95000" data-location="kitwe">
-                        <div class="property-image placeholder">Plot of Land, Chambishi Rd</div>
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Commercial Plot</h3>
-                                <span class="property-tag">Land</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Chambishi Rd, Kitwe</span>
-                            </div>
-                            <div class="property-price">ZMW 95,000</div>
-                            <div class="property-meta">Plot Size: 1,200m² • Prime Road Frontage</div>
-                            <div class="property-footer">
-                                <a class="plan-link" onclick="showPaymentPlan('generic-land')">Payment Options</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="residential" data-price="1200000" data-location="lusaka">
-                        <img class="property-image" src="/images/properties/lusaka-house.webp" alt="Executive House in Lusaka">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">Executive House</h3>
-                                <span class="property-tag">Residential</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Kabulonga, Lusaka</span>
-                            </div>
-                            <div class="property-price">ZMW 1,200,000</div>
-                            <div class="property-meta">
-                                <i class="fas fa-bed"></i> 4 Beds • <i class="fas fa-bath"></i> 3 Baths • Swimming Pool
-                            </div>
-                            <div class="property-footer">
-                                <a href="#contact" class="plan-link">Request Viewing</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="property-card" data-type="land" data-price="250000" data-location="lusaka">
-                        <div class="property-image placeholder">5-Acre Land, Lusaka West</div>
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3 class="property-title">5-Acre Smallholding</h3>
-                                <span class="property-tag">Land</span>
-                            </div>
-                            <div class="property-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Lusaka West</span>
-                            </div>
-                            <div class="property-price">ZMW 250,000</div>
-                            <div class="property-meta">Plot Size: 5 Acres • Borehole on site</div>
-                            <div class="property-footer">
-                                <a class="plan-link" onclick="showPaymentPlan('generic-land')">Payment Options</a>
-                                <a href="#contact" class="inquire-btn">Inquire</a>
-                            </div>
-                        </div>
-                    </div>
+                <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 </div>
             </div>
         </section>
 
-        <section class="map-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Property Locations</h2>
-                    <p class="section-subtitle">Explore our properties across Zambia</p>
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Property Locations</h2>
+                    <p class="mt-2 text-lg text-gray-600">Explore our properties across Zambia on the map</p>
                 </div>
-                <div id="mapid">Interactive Map</div>
+                <div id="mapid" class="shadow-lg"></div>
             </div>
         </section>
 
-        <section class="whatsapp-cta">
-            <div class="container">
-                <div class="whatsapp-content">
-                    <h2 class="whatsapp-title">Can't Find What You're Looking For?</h2>
-                    <p class="whatsapp-text">Let us know what you need. Our team can help you find the perfect property that matches your requirements.</p>
-                    <a href="https://wa.me/260955869020" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i>
-                        Contact an Agent
-                    </a>
-                </div>
+        <section class="bg-cover bg-center" style="background-image: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.8)), url(images/properties/cta-background-image.webp);">
+            <div class="container mx-auto px-4 py-20 text-center text-white">
+                <h2 class="text-3xl font-bold mb-4">Can't Find What You're Looking For?</h2>
+                <p class="text-lg max-w-2xl mx-auto mb-8">
+                    Let us know what you need. Our team can help you find the perfect property that matches your requirements.
+                </p>
+                <a href="https://wa.me/260955869020" class="bg-green-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-green-600 transition duration-300 inline-flex items-center space-x-3">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>Contact an Agent</span>
+                </a>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <img src="/images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
-                        <div class="footer-logo-text">
-                            <h3>Leaf-Note</h3>
-                            <p>Financial Services & Real Estate Ltd</p>
+    <footer class="bg-slate-800 text-slate-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-4">
+                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" class="h-12 w-12">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Leaf-Note</h3>
+                            <p class="text-xs text-slate-400">Financial Services & Real Estate Ltd</p>
                         </div>
-                    </div>
-                    <p>Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    </div>
+                    </a>
+                    <p class="text-sm">Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
                 </div>
-                <div class="footer-links-container">
-                    <h4 class="footer-heading">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="index.html">Home</a></li>
-                        <li class="footer-link"><a href="#services">Services</a></li>
-                        <li class="footer-link"><a href="properties.html">Properties</a></li>
-                        <li class="footer-link"><a href="#contact">Contact</a></li>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Home</a></li>
+                        <li><a href="#services" class="hover:text-white">Services</a></li>
+                        <li><a href="properties.html" class="hover:text-white">Properties</a></li>
+                        <li><a href="#contact" class="hover:text-white">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-links-container">
-                    <h4 class="footer-heading">Our Services</h4>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">Property Acquisition</a></li>
-                        <li class="footer-link"><a href="#">Project Financing</a></li>
-                        <li class="footer-link"><a href="#">Property Management</a></li>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Our Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="javascript:void(0);" class="hover:text-white">Property Acquisition</a></li>
+                        <li><a href="javascript:void(0);" class="hover:text-white">Project Financing</a></li>
+                        <li><a href="javascript:void(0);" class="hover:text-white">Property Management</a></li>
                     </ul>
                 </div>
-                <div class="footer-newsletter">
-                    <h4 class="footer-heading">Newsletter</h4>
-                    <p>Subscribe to receive property updates and market insights.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email" class="newsletter-input" required>
-                        <button type="submit" class="newsletter-button">
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Newsletter</h4>
+                    <p class="text-sm mb-3">Subscribe to receive property updates and market insights.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="w-full bg-slate-700 text-white border-slate-600 rounded-l-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        <button type="submit" class="bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-700">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </form>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
+            <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-400">
+                <p>&copy; 2025 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Payment Plan</h3>
-                <button class="modal-close" onclick="closePaymentModal()" aria-label="Close payment plan modal">
-                    <i class="fas fa-times"></i>
-                </button>
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg mx-auto transform transition-all duration-300 ease-in-out scale-95 opacity-0" id="modal-content">
+            <div class="flex justify-between items-center p-5 border-b border-gray-200">
+                <h3 id="modal-title" class="text-2xl font-semibold text-gray-800">Payment Plan</h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 text-2xl" aria-label="Close modal">&times;</button>
             </div>
-            <div class="modal-body">
-                <div id="plan-details-container"></div>
-
-                <div class="calculator">
-                    <h5 class="calculator-title">Calculate Monthly Payments</h5>
-                    <div class="calculator-grid">
-                        <input type="number" id="calc-price" class="calculator-input" placeholder="Price">
-                        <input type="number" id="calc-months" class="calculator-input" placeholder="Months">
-                        <div id="calc-result" class="calculator-input">ZMW 0.00</div>
+            <div class="p-6">
+                <div id="plan-details-container" class="mb-6"></div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h5 class="font-semibold text-gray-700 mb-3">Calculate Monthly Payments</h5>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <input type="number" id="calc-price" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Total Price">
+                        <input type="number" id="calc-months" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Months">
+                        <div id="calc-result" class="bg-gray-200 p-2 rounded-md text-center font-bold text-gray-800">ZMW 0.00</div>
                     </div>
-                    <div class="calculator-note">
-                        Note: 10% deposit required upfront
-                    </div>
+                    <p class="text-xs text-gray-500 mt-3 text-center">Note: A 10% deposit is required upfront.</p>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="#contact" class="btn btn-primary" onclick="closePaymentModal()">Get Started</a>
+            <div class="p-5 border-t border-gray-200 text-right">
+                <a href="#" id="modalContactBtn" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300">
+                    Get Started
+                </a>
             </div>
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <script>
-        // All JavaScript from the source file, with modifications for this page.
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
-            const menuBtn = document.getElementById('menuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
 
-            if (menuBtn && mobileMenu) {
-                menuBtn.addEventListener('click', () => {
-                    const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
-                    menuBtn.setAttribute('aria-expanded', !expanded);
-                    mobileMenu.classList.toggle('active');
-                });
-            }
-
-            // Sticky navigation
-            const navbar = document.getElementById('mainNav');
-            if (navbar) {
-                window.addEventListener('scroll', () => {
-                    navbar.classList.toggle('scrolled', window.scrollY > 100);
-                });
-            }
-
-            // Payment plan modal functionality
-            const paymentModal = document.getElementById('paymentModal');
-            const calcPriceInput = document.getElementById('calc-price');
-            const calcMonthsInput = document.getElementById('calc-months');
-            const resultElement = document.getElementById('calc-result');
-            const planDetailsContainer = document.getElementById('plan-details-container');
-
-            const planData = {
-                '20x30': { title: '20x30 Minsundu Plot', basePrice: 50000, options: [{ months: 6, price: 55000 }, { months: 12, price: 60000 }] },
-                '30x30': { title: '30x30 Minsundu Plot', basePrice: 60000, options: [{ months: 12, price: 65000 }, { months: 18, price: 70000 }] },
-                'dola-hill': { title: 'Dola Hill Plot', basePrice: 130000, options: [{ months: 1, price: 130000 }] },
-                'generic-land': { title: 'Land Plot', basePrice: 95000, options: [{ months: 12, price: 105000 }] }
-            };
-
-            window.showPaymentPlan = (planType) => {
-                const plan = planData[planType];
-                if (!plan) return;
-
-                let optionsHtml = `<h5>${plan.title} - Payment Options</h5>`;
-                plan.options.forEach(opt => {
-                    optionsHtml += `<div class="plan-option"><strong>${opt.months} Month Plan:</strong> ZMW ${opt.price.toLocaleString('en-ZM')}</div>`;
-                });
-                if (planDetailsContainer) planDetailsContainer.innerHTML = optionsHtml;
-
-                calcPriceInput.value = plan.basePrice;
-                calculatePayment();
-                paymentModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            window.closePaymentModal = () => {
-                paymentModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-
-            if (paymentModal) {
-                paymentModal.addEventListener('click', (e) => {
-                    if (e.target === paymentModal) {
-                        closePaymentModal();
-                    }
-                });
-            }
-
-            function calculatePayment() {
-                if (!calcPriceInput || !calcMonthsInput || !resultElement) return;
-                const price = parseFloat(calcPriceInput.value) || 0;
-                const months = parseInt(calcMonthsInput.value) || 1;
-                const deposit = price * 0.1;
-                const monthly = (price - deposit) / months;
-                resultElement.textContent = `ZMW ${monthly.toLocaleString('en-ZM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            }
-
-            if (calcPriceInput && calcMonthsInput) {
-                calcPriceInput.addEventListener('input', calculatePayment);
-                calcMonthsInput.addEventListener('input', calculatePayment);
-                calculatePayment();
-            }
-
-            // Property filtering system
-            const filterType = document.getElementById('filter-type');
-            const filterPrice = document.getElementById('filter-price');
-            const filterLocation = document.getElementById('filter-location');
-            const allCards = document.querySelectorAll('.property-card');
+            // --- CONSTANTS & ELEMENTS ---
+            const grid = document.getElementById('properties-grid');
             const visibleCountEl = document.getElementById('visible-count');
             const totalCountEl = document.getElementById('total-count');
+            const filterTypeEl = document.getElementById('filter-type');
+            const filterPriceEl = document.getElementById('filter-price');
+            const filterLocationEl = document.getElementById('filter-location');
+            const filterButton = document.getElementById('filter-button');
+            const modal = document.getElementById('paymentModal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const planDetailsContainer = document.getElementById('plan-details-container');
+            const calcPriceInput = document.getElementById('calc-price');
+            const calcMonthsInput = document.getElementById('calc-months');
+            const calcResultEl = document.getElementById('calc-result');
+            const mainContentElements = document.querySelectorAll('header, main, footer');
 
-            if (totalCountEl) totalCountEl.textContent = allCards.length;
+            // --- ACCESSIBILITY & STATE ---
+            let previouslyFocusedElement;
 
-            window.filterProperties = () => {
-                const type = filterType.value;
-                const price = filterPrice.value;
-                const location = filterLocation.value;
-                let visibleCount = 0;
+            // --- DATA ---
+            const propertiesData = [
+                { id: 14, title: 'Minsundu Spring View Estate', type: 'land', price: 55000, location: 'ndola', details: '600m² titled plot, 600m from Minsundu Secondary. Payment plan available.', image: 'images/properties/minsundu_plot.webp', planKey: 'none', tag: 'Selling Now!' },
+                { id: 9, title: 'Low Cost Plot', type: 'land', price: 35000, location: 'ndola', details: 'Ideal for a starter home', image: 'images/properties/low-cost-plot.webp', planKey: 'none', tag: 'Serviced Plot' },
+                { id: 10, title: 'Medium Cost Plot', type: 'land', price: 55000, location: 'ndola', details: 'Perfect for a family home', image: 'images/properties/medium-cost-plot.webp', planKey: 'none', tag: 'Serviced Plot' },
+                { id: 11, title: 'High Cost Executive Plot', type: 'land', price: 950000, location: 'ndola', details: 'Prime location in a gated community', image: 'images/properties/high-cost-executive-plot.webp', planKey: 'none', tag: 'Luxury Plot' },
+                { id: 12, title: 'Commercial Plot', type: 'commercial', price: 450000, location: 'ndola', details: 'Prime for retail on a busy road', image: 'images/properties/commercial-plot-ndola.webp', planKey: 'none', tag: 'Commercial' },
+                { id: 13, title: 'Serviced Minsundu Plot 20x30', type: 'land', price: 130000, location: 'ndola', details: 'On Title • Electricity & Water mains nearby', image: 'images/properties/minsundu_plot 0.webp', planKey: 'none', tag: 'On Title' },
+                { id: 3, title: 'Dola Hill Plot', type: 'land', price: 700000, location: 'ndola', details: 'Structure at window level', image: 'images/properties/dola-hill-plot.webp', planKey: 'none', tag: 'Land' },
+                { id: 4, title: '2-Bed Ndola CBD Flat', type: 'residential', price: 1200000, location: 'ndola', details: 'Modern flat in a secure complex • Opposite ZRA Offices', image: 'images/properties/ndola-cbd-flat.webp', planKey: 'none', tag: 'For Sale' },
+                { id: 6, title: 'Commercial Plot', type: 'land', price: 95000, location: 'kitwe', details: 'Prime road frontage', image: 'images/properties/commercial-plot-kitwe.webp', planKey: 'none', tag: 'Land' },
+            ];
 
-                allCards.forEach(card => {
-                    const cardType = card.dataset.type;
-                    const cardPrice = parseInt(card.dataset.price);
-                    const cardLocation = card.dataset.location;
+            const paymentPlans = { /* No specific modal plans currently */ };
 
-                    let priceMatch = !price;
-                    if (price) {
-                        if (price.includes('+')) {
-                            const min = parseInt(price);
-                            priceMatch = cardPrice >= min;
-                        } else {
-                            const [min, max] = price.split('-').map(Number);
-                            priceMatch = cardPrice >= min && cardPrice <= max;
-                        }
-                    }
+            const mapLocations = [
+                { coords: [-12.8870, 28.6540], title: 'Minsundu Spring View Estate', planKey: 'none' },
+                { coords: [-12.8880, 28.6550], title: 'Serviced Minsundu Plot', planKey: 'none' },
+                { coords: [-12.9782, 28.6414], title: 'Ndola CBD Flat', planKey: 'none' },
+                { coords: [-12.9542, 28.5857], title: 'Dola Hill Plot', planKey: 'none' },
+                { coords: [-12.8, 28.18], title: 'Chambishi Rd Plot, Kitwe', planKey: 'none' },
+                { coords: [-12.99, 28.67], title: 'Spring View Estate, Ndola', planKey: 'none' }
+            ];
 
-                    const match = (!type || cardType === type) && (!location || cardLocation === location) && priceMatch;
+            // --- FUNCTIONS ---
+            const formatPrice = (price) => `ZMW ${price.toLocaleString('en-ZM')}`;
 
-                    card.style.display = match ? 'flex' : 'none';
-                    if (match) visibleCount++;
+            const showPaymentPlan = (planKey) => {
+                const plan = paymentPlans[planKey];
+                if (!plan) return;
+                let optionsHtml = `<h4 class="font-bold text-lg mb-3 text-gray-700">${plan.title}</h4>`;
+                plan.options.forEach(opt => {
+                    optionsHtml += `<div class="flex justify-between py-2 border-b"><span>${opt.months} Month Plan:</span><span class="font-semibold">${formatPrice(opt.price)}</span></div>`;
                 });
+                planDetailsContainer.innerHTML = optionsHtml;
+                calcPriceInput.value = plan.basePrice;
+                calculatePayment();
+                modal.classList.remove('hidden');
+                setTimeout(() => { modalContent.classList.remove('scale-95', 'opacity-0'); }, 10);
+                previouslyFocusedElement = document.activeElement;
+                mainContentElements.forEach(el => el.setAttribute('inert', ''));
+                document.addEventListener('keydown', handleModalKeydown);
+                closeModalBtn.focus();
+            };
 
+            const renderProperties = (properties) => {
+                if (!grid) return;
+                grid.innerHTML = '';
+                if (properties.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-12">
+                                         <i class="fas fa-search-minus text-4xl text-gray-400 mb-4"></i>
+                                         <h3 class="text-xl font-semibold text-gray-700">No Properties Found</h3>
+                                         <p class="text-gray-500 mt-1">Try adjusting your filters or resetting your search.</p>
+                                       </div>`;
+                    return;
+                }
+                const titlesToHidePrice = ['Low Cost Plot', 'Medium Cost Plot', 'High Cost Executive Plot', 'Commercial Plot', 'Dola Hill Plot'];
+                properties.forEach(prop => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105';
+                    let priceContentHTML = '';
+                    if (titlesToHidePrice.includes(prop.title)) {
+                        priceContentHTML = `<div class="text-lg font-bold text-gray-700 mb-2">Price on Application</div>
+                                           <p class="text-xs text-amber-600 font-semibold h-4"></p>`;
+                    } else {
+                        const priceDisplay = formatPrice(prop.price);
+                        const isHighValue = prop.price > 60000;
+                        const negotiableText = isHighValue ? `<p class="text-xs text-amber-600 font-semibold">Price Negotiable</p>` : '<p class="text-xs h-4"></p>';
+                        priceContentHTML = `<div class="text-xl font-extrabold text-gray-900 mb-2">${priceDisplay}</div>
+                                            ${negotiableText}`;
+                    }
+                    const isHighValue = prop.price > 60000;
+                    const footerButton = prop.planKey !== 'none' && !isHighValue
+                        ? `<button data-plan-key="${prop.planKey}" class="view-plan-btn text-sm font-semibold text-blue-600 hover:text-blue-800">View Payment Plan</button>`
+                        : `<a href="javascript:void(0);" class="text-sm font-semibold text-gray-600">Inquire</a>`;
+                    card.innerHTML = `
+                        <div class="relative">
+                            <img src="${prop.image}" alt="${prop.title}" class="w-full h-48 object-cover" loading="lazy">
+                            <span class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">${prop.tag}</span>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col">
+                            <h3 class="text-lg font-bold text-gray-800 mb-1">${prop.title}</h3>
+                            <p class="text-sm text-gray-500 mb-3 flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> ${prop.location.charAt(0).toUpperCase() + prop.location.slice(1)}</p>
+                            ${priceContentHTML}
+                            <p class="text-sm text-gray-600 flex-grow">${prop.details}</p>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-between items-center">
+                                ${footerButton}
+                                <a href="javascript:void(0);" class="text-sm bg-gray-200 text-gray-800 px-3 py-1 rounded-full hover:bg-gray-300">Details</a>
+                            </div>
+                        </div>`;
+                    grid.appendChild(card);
+                });
+            };
+
+            const updateCounts = (visibleCount) => {
+                if (totalCountEl) totalCountEl.textContent = propertiesData.length;
                 if (visibleCountEl) visibleCountEl.textContent = visibleCount;
             };
 
-            [filterType, filterPrice, filterLocation].forEach(el => {
-                if (el) el.addEventListener('change', filterProperties);
-            });
+            const filterProperties = () => {
+                const type = filterTypeEl.value;
+                const priceRange = filterPriceEl.value;
+                const location = filterLocationEl.value;
+                let [minPrice, maxPrice] = [0, Infinity];
+                if (priceRange) { [minPrice, maxPrice] = priceRange.split('-').map(Number); }
+                const filteredProperties = propertiesData.filter(prop => {
+                    const typeMatch = !type || prop.type === type;
+                    const locationMatch = !location || prop.location === location;
+                    const priceMatch = prop.price >= minPrice && prop.price <= maxPrice;
+                    return typeMatch && locationMatch && priceMatch;
+                });
+                renderProperties(filteredProperties);
+                updateCounts(filteredProperties.length);
+                const params = new URLSearchParams();
+                if (type) params.set('type', type);
+                if (priceRange) params.set('price', priceRange);
+                if (location) params.set('location', location);
+                const newUrl = `${window.location.pathname}?${params.toString()}`;
+                window.history.replaceState({ path: newUrl }, '', newUrl);
+            };
 
-            // Initial filter call
-            filterProperties();
-
-            // Leaflet.js map initialization
-            const mapElement = document.getElementById('mapid');
-            if (mapElement) {
-                const map = L.map('mapid').setView([-13.5, 28.5], 7); // Centered on Copperbelt
-
+            const initMap = () => {
+                if (!document.getElementById('mapid')) return;
+                const map = L.map('mapid').setView([-13.5, 28.5], 7);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
+                mapLocations.forEach(loc => {
+                    const popupContent = `<div class="text-center p-1"><h4 class="font-bold text-gray-800">${loc.title}</h4>${loc.planKey !== 'none' ? `<a href="javascript:void(0);" data-plan-key="${loc.planKey}" class="view-plan-link text-blue-600 hover:underline">View Payment Plan</a>` : `<a href="javascript:void(0);" class="text-amber-600 hover:underline">Inquire</a>`}</div>`;
+                    const marker = L.marker(loc.coords).addTo(map).bindPopup(popupContent);
+                    marker.on('popupopen', () => {
+                        const popupEl = marker.getPopup().getElement();
+                        const link = popupEl.querySelector('.view-plan-link');
+                        if (link) {
+                            link.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                const planKey = e.target.dataset.planKey;
+                                if (planKey) showPaymentPlan(planKey);
+                            });
+                        }
+                    });
+                });
+            };
 
-                const properties = [
-                    { coords: [-12.8860, 28.6522], title: 'Minsundu Plot', plan: '20x30' },
-                    { coords: [-12.9782, 28.6414], title: 'Ndola CBD Flat', plan: 'none' },
-                    { coords: [-12.9542, 28.5857], title: 'Dola Hill Plot', plan: 'dola-hill' },
-                    // New property locations
-                    { coords: [-12.98, 28.25], title: 'Parklands House, Kitwe', plan: 'none' },
-                    { coords: [-12.8, 28.18], title: 'Chambishi Rd Plot, Kitwe', plan: 'generic-land' },
-                    { coords: [-15.39, 28.32], title: 'Kabulonga House, Lusaka', plan: 'none' },
-                    { coords: [-15.42, 28.15], title: 'Lusaka West Plot', plan: 'generic-land' }
-                ];
+            const handleModalKeydown = (e) => {
+                if (e.key === 'Escape') { closePaymentModal(); return; }
+                if (e.key === 'Tab') {
+                    const focusableElements = modal.querySelectorAll('button, [href], input');
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+                    if (e.shiftKey) { if (document.activeElement === firstElement) { lastElement.focus(); e.preventDefault(); } }
+                    else { if (document.activeElement === lastElement) { firstElement.focus(); e.preventDefault(); } }
+                }
+            };
 
-                properties.forEach(prop => {
-                    const marker = L.marker(prop.coords).addTo(map);
-                    const popupContent = `
-                            <div style="font-family: 'Inter', sans-serif;">
-                                <h4 style="font-weight: bold; margin-bottom: 0.5rem;">${prop.title}</h4>
-                                ${prop.plan !== 'none' ? `<a href="#" onclick="showPaymentPlan('${prop.plan}')" style="color: #1d4ed8; text-decoration: none; font-weight: 600;">View Payment Plan</a>` : `<a href="#contact" style="color: #f59e0b; text-decoration: none; font-weight: 600;">Inquire</a>`}
-                            </div>
-                        `;
-                    marker.bindPopup(popupContent);
+            const closePaymentModal = () => {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    mainContentElements.forEach(el => el.removeAttribute('inert'));
+                    document.removeEventListener('keydown', handleModalKeydown);
+                    if (previouslyFocusedElement) previouslyFocusedElement.focus();
+                }, 300);
+            };
+
+            const calculatePayment = () => {
+                const price = parseFloat(calcPriceInput.value) || 0;
+                const months = parseInt(calcMonthsInput.value) || 1;
+                if (price === 0 || months <= 0) { calcResultEl.textContent = 'ZMW 0.00'; return; }
+                const deposit = price * 0.1;
+                const monthly = (price - deposit) / months;
+                calcResultEl.textContent = `ZMW ${monthly.toLocaleString('en-ZM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            };
+
+            const setInitialFiltersFromURL = () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                filterTypeEl.value = urlParams.get('type') || '';
+                filterPriceEl.value = urlParams.get('price') || '';
+                filterLocationEl.value = urlParams.get('location') || '';
+            };
+
+            // --- EVENT LISTENERS ---
+            document.getElementById('menuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+
+            filterButton.addEventListener('click', filterProperties);
+
+            if (grid) {
+                grid.addEventListener('click', e => {
+                    const planButton = e.target.closest('.view-plan-btn');
+                    if (planButton) {
+                        const planKey = planButton.dataset.planKey;
+                        if (planKey) { showPaymentPlan(planKey); }
+                    }
                 });
             }
+
+            closeModalBtn.addEventListener('click', closePaymentModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closePaymentModal(); });
+            document.getElementById('modalContactBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                closePaymentModal();
+            });
+            [calcPriceInput, calcMonthsInput].forEach(input => {
+                input.addEventListener('input', calculatePayment);
+            });
+
+            // --- INITIALIZATION ---
+            initMap();
+            setInitialFiltersFromURL();
+            filterProperties();
         });
     </script>
 </body>

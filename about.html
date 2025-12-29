@@ -1,173 +1,219 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Leaf-Note Financial Services & Real Estate Ltd</title>
     <meta name="description" content="Learn about Leaf-Note, your trusted partner for real estate and financial services in Zambia.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="icon" href="images/properties/Logo.webp" type="image/webp">
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-link.active {
+            color: #3b82f6; /* text-blue-500 */
+            font-weight: 600;
+        }
+
+        .about-hero-section {
+            /* Add your about us hero background image here, e.g., an image of your office or team */
+            background-image: linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.7)), url('images/properties/about-hero-background.webp');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+<body class="bg-gray-50">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="border-b border-gray-200">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2">
+                <div class="flex items-center space-x-6 text-sm text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-phone-alt text-gray-500"></i>
                         <span>+260 95 586 9020</span>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-envelope text-gray-500"></i>
                         <span>info@leaf-note.com</span>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <div class="flex items-center space-x-4 text-gray-600">
+                    <a href="#" aria-label="Facebook" class="hover:text-blue-600"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/260955869020" aria-label="WhatsApp" class="hover:text-blue-600"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
-        <nav class="sticky-nav" id="mainNav">
-            <div class="container">
-                <div class="nav-container">
-                    <a href="index.html" class="logo-container">
-                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
-                        <div class="logo-text">
-                            <h1>Leaf-Note</h1>
-                            <p>Financial Services & Real Estate Ltd</p>
-                        </div>
-                    </a>
-                    <div class="nav-links">
-                        <a href="index.html" class="nav-link">Home</a>
-                        <a href="about.html" class="nav-link active">About Us</a>
-                        <a href="services.html" class="nav-link">Services</a>
-                        <a href="properties.html" class="nav-link">Properties</a>
-                        <a href="contact.html" class="nav-link">Contact</a>
+
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8" id="mainNav">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" class="h-12 w-12">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">Leaf-Note</h1>
+                        <p class="text-xs text-gray-500">Financial Services & Real Estate Ltd</p>
                     </div>
-                    <button class="mobile-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
-                        <i class="fas fa-bars"></i>
-                        <span class="sr-only">Menu</span>
-                    </button>
-                </div>
-                <div class="mobile-menu" id="mobileMenu">
-                    <a href="index.html" class="nav-link">Home</a>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8 text-gray-700">
+                    <a href="index.html" class="nav-link hover:text-blue-500">Home</a>
                     <a href="about.html" class="nav-link active">About Us</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="properties.html" class="nav-link">Properties</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="services.html" class="nav-link hover:text-blue-500">Services</a>
+                    <a href="properties.html" class="nav-link hover:text-blue-500">Properties</a>
+                    <a href="contact.html" class="nav-link hover:text-blue-500">Contact</a>
                 </div>
+
+                <button class="md:hidden text-2xl" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                    <span class="sr-only">Menu</span>
+                </button>
+            </div>
+
+            <div class="hidden md:hidden pb-4" id="mobileMenu">
+                <a href="index.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Home</a>
+                <a href="about.html" class="nav-link active block py-2 px-4 hover:bg-gray-100 rounded">About Us</a>
+                <a href="services.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Services</a>
+                <a href="properties.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Properties</a>
+                <a href="contact.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Contact</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="page-header">
-            <div class="container">
-                <h1>About Leaf-Note</h1>
-                <p>Your trusted partner in Zambian real estate.</p>
+        <section class="about-hero-section bg-cover bg-center text-white py-20 text-center">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl md:text-5xl font-bold">About Leaf-Note</h1>
+                <p class="mt-4 text-lg max-w-2xl mx-auto text-slate-300">Your trusted partner in Zambian real estate.</p>
             </div>
         </section>
 
-        <section class="about-content-section">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-text">
-                        <h2>Our Story</h2>
-                        <p>Leaf-Note Financial Services & Real Estate Ltd was founded to demystify and simplify property ownership in Zambia. We are a premier real estate and financial services firm dedicated to helping individuals and businesses find their dream property with flexible, accessible financing options.</p>
-                        <p>As a trusted partner, we are committed to navigating the complexities of the property market on behalf of our clients, ensuring every transaction is smooth, transparent, and beneficial. We are proudly affiliated with PACRA and operate with the highest standards of integrity.</p>
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div class="lg:col-span-2">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Story</h2>
+                        <p class="text-gray-600 mb-4">Leaf-Note Financial Services & Real Estate Ltd was founded to demystify and simplify property ownership in Zambia. We are a premier real estate and financial services firm dedicated to helping individuals and businesses find their dream property with flexible, accessible financing options.</p>
+                        <p class="text-gray-600 mb-8">As a trusted partner, we are committed to navigating the complexities of the property market on behalf of our clients, ensuring every transaction is smooth, transparent, and beneficial. We are proudly affiliated with PACRA and operate with the highest standards of integrity.</p>
 
-                        <h3>Our Mission</h3>
-                        <p>To make property ownership in Zambia accessible and affordable through expert guidance, extensive property listings, and innovative financing solutions that empower our clients to build their future.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mt-10 mb-2">Our Mission</h3>
+                        <p class="text-gray-600 mb-8">To make property ownership in Zambia accessible and affordable through expert guidance, extensive property listings, and innovative financing solutions that empower our clients to build their future.</p>
 
-                        <h3>Our Vision</h3>
-                        <p>To be the leading and most trusted real estate and financial partner in Zambia, known for our commitment to client success, market expertise, and contribution to national development.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mt-10 mb-2">Our Vision</h3>
+                        <p class="text-gray-600">To be the leading and most trusted real estate and financial partner in Zambia, known for our commitment to client success, market expertise, and contribution to national development.</p>
                     </div>
-                    <div class="about-info-card">
-                        <h3>Company Details</h3>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong>Address:</strong>
-                                <p>Mpelembe House, 2nd Floor, R207A, Ndola, Zambia</p>
+                    <div class="lg:col-span-1">
+                        <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 space-y-6">
+                            <h3 class="text-2xl font-bold">Company Details</h3>
+                            <div class="flex items-start space-x-4">
+                                <i class="fas fa-map-marker-alt text-blue-600 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold">Address:</strong>
+                                    <p class="text-gray-600">Mpelembe House, Broadway Rd, 2nd Floor, R207A, Ndola, Zambia</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <strong>Hours:</strong>
-                                <p>Mon - Fri: 8:00 AM - 5:00 PM</p>
-                                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                            <div class="flex items-start space-x-4">
+                                <i class="fas fa-clock text-blue-600 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold">Hours:</strong>
+                                    <p class="text-gray-600">Mon - Fri: 8:00 AM - 5:00 PM</p>
+                                    <p class="text-gray-600">Saturday: 9:00 AM - 1:00 PM</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <strong>Phone:</strong>
-                                <p>+260 95 586 9020</p>
+                            <div class="flex items-start space-x-4">
+                                <i class="fas fa-phone-alt text-blue-600 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold">Phone:</strong>
+                                    <p class="text-gray-600">+260 95 586 9020</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <strong>Email:</strong>
-                                <p>info@leaf-note.com</p>
+                            <div class="flex items-start space-x-4">
+                                <i class="fas fa-envelope text-blue-600 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold">Email:</strong>
+                                    <p class="text-gray-600">info@leaf-note.com</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="bg-blue-600">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center text-white">
+                <h2 class="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+                <p class="max-w-2xl mx-auto text-lg text-blue-100 mb-8">Whether you're looking for your first home, a new investment, or financing for your next project, we're here to help.</p>
+                <a href="contact.html" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-md text-lg hover:bg-gray-100 transition duration-300">
+                    Get In Touch
+                </a>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
-                        <div class="footer-logo-text">
-                            <h3>Leaf-Note</h3>
-                            <p>Financial Services & Real Estate Ltd</p>
+    <footer class="bg-slate-800 text-slate-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-4">
+                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" class="h-12 w-12">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Leaf-Note</h3>
+                            <p class="text-xs text-slate-400">Financial Services & Real Estate Ltd</p>
                         </div>
-                    </div>
-                    <p class="footer-about-text">Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
+                    </a>
+                    <p class="text-sm">Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
                 </div>
-                <div class="footer-links-container">
-                    <h4 class="footer-heading">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="index.html">Home</a></li>
-                        <li class="footer-link"><a href="about.html">About Us</a></li>
-                        <li class="footer-link"><a href="services.html">Services</a></li>
-                        <li class="footer-link"><a href="properties.html">Properties</a></li>
-                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="properties.html" class="hover:text-white">Properties</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
-                    <h4 class="footer-heading">Contact Us</h4>
-                    <p>Mpelembe House, 2nd Floor, R207A, Ndola</p>
-                    <p>+260 95 586 9020</p>
-                    <p>info@leaf-note.com</p>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Mpelembe House, Broadway Rd, 2nd Floor, R207A, Ndola</li>
+                        <li>+260 95 586 9020</li>
+                        <li>info@leaf-note.com</li>
+                    </ul>
                 </div>
-                <div class="footer-social-container">
-                    <h4 class="footer-heading">Follow Us</h4>
-                    <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" aria-label="Facebook" class="text-xl hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/260955869020" aria-label="WhatsApp" class="text-xl hover:text-white"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>Proudly Affiliated with PACRA (Companies Act 2017)</p>
-                <p class="copyright">&copy; 2024 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
+            <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-400">
+                <p>&copy; 2025 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Simple script for mobile menu toggle
+        document.getElementById('menuBtn').addEventListener('click', function () {
+            var mobileMenu = document.getElementById('mobileMenu');
+            var isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

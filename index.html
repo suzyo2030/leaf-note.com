@@ -1,187 +1,214 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaf-Note Financial Services & Real Estate Ltd | Zambia Property Experts</title>
     <meta name="description" content="Premier real estate and financial services in Zambia. Find your dream property with flexible financing options.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="icon" href="images/properties/Logo.webp" type="image/webp">
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-link.active {
+            color: #3b82f6; /* text-blue-500 */
+            font-weight: 600;
+        }
+
+        .hero-section {
+            /* Replace 'hero-background.webp' with the name of the file you upload */
+            background-image: linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.7)), url('images/properties/hero-background.webp');
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+<body class="bg-gray-50">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="border-b border-gray-200">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2">
+                <div class="flex items-center space-x-6 text-sm text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-phone-alt text-gray-500"></i>
                         <span>+260 95 586 9020</span>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-envelope text-gray-500"></i>
                         <span>info@leaf-note.com</span>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <div class="flex items-center space-x-4 text-gray-600">
+                    <a href="#" aria-label="Facebook" class="hover:text-blue-600"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/260955869020" aria-label="WhatsApp" class="hover:text-blue-600"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
-        <nav class="sticky-nav" id="mainNav">
-            <div class="container">
-                <div class="nav-container">
-                    <a href="index.html" class="logo-container">
-                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
-                        <div class="logo-text">
-                            <h1>Leaf-Note</h1>
-                            <p>Financial Services & Real Estate Ltd</p>
-                        </div>
-                    </a>
-                    <div class="nav-links">
-                        <a href="index.html" class="nav-link active">Home</a>
-                        <a href="about.html" class="nav-link">About Us</a>
-                        <a href="services.html" class="nav-link">Services</a>
-                        <a href="properties.html" class="nav-link">Properties</a>
-                        <a href="contact.html" class="nav-link">Contact</a>
+
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8" id="mainNav">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" class="h-12 w-12">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">Leaf-Note</h1>
+                        <p class="text-xs text-gray-500">Financial Services & Real Estate Ltd</p>
                     </div>
-                    <button class="mobile-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
-                        <i class="fas fa-bars"></i>
-                        <span class="sr-only">Menu</span>
-                    </button>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8 text-gray-700">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="about.html" class="nav-link hover:text-blue-500">About Us</a>
+                    <a href="services.html" class="nav-link hover:text-blue-500">Services</a>
+                    <a href="properties.html" class="nav-link hover:text-blue-500">Properties</a>
+                    <a href="contact.html" class="nav-link hover:text-blue-500">Contact</a>
                 </div>
-                <div class="mobile-menu" id="mobileMenu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="about.html" class="nav-link">About Us</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="properties.html" class="nav-link">Properties</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </div>
+
+                <button class="md:hidden text-2xl" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                    <span class="sr-only">Menu</span>
+                </button>
+            </div>
+
+            <div class="hidden md:hidden pb-4" id="mobileMenu">
+                <a href="index.html" class="nav-link active block py-2 px-4 hover:bg-gray-100 rounded">Home</a>
+                <a href="about.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">About Us</a>
+                <a href="services.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Services</a>
+                <a href="properties.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Properties</a>
+                <a href="contact.html" class="nav-link block py-2 px-4 hover:bg-gray-100 rounded">Contact</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero-section">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Building Your Zambian Dream, <span class="accent-text">Together.</span></h1>
-                    <p class="hero-subtitle">Your trusted partner in navigating the Zambian property market. We make ownership accessible and affordable.</p>
-                    <div class="hero-cta">
-                        <a href="properties.html" class="btn btn-primary">Explore Properties</a>
-                        <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        <section class="hero-section bg-cover bg-center text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center min-h-[60vh]">
+                <div class="max-w-3xl text-center md:text-left">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Building Your Zambian Dream, <span class="text-blue-400">Together.</span></h1>
+                    <p class="mt-4 text-lg md:text-xl text-gray-200">Your trusted partner in navigating the Zambian property market. We make ownership accessible and affordable.</p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="properties.html" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-md text-lg hover:bg-blue-700 transition duration-300">Explore Properties</a>
+                        <a href="contact.html" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-md text-lg hover:bg-white hover:text-slate-900 transition duration-300">Contact Us</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">200+</div>
-                        <div class="stat-label">Properties Sold</div>
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-bold text-blue-600">200+</div>
+                        <div class="mt-2 text-gray-500">Properties Sold</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">2+</div>
-                        <div class="stat-label">Years Experience</div>
+                    <div>
+                        <div class="text-4xl font-bold text-blue-600">2+</div>
+                        <div class="mt-2 text-gray-500">Years Experience</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Client Satisfaction</div>
+                    <div>
+                        <div class="text-4xl font-bold text-blue-600">98%</div>
+                        <div class="mt-2 text-gray-500">Client Satisfaction</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">ZMW 5M+</div>
-                        <div class="stat-label">Financed Projects</div>
+                    <div>
+                        <div class="text-4xl font-bold text-blue-600">ZMW 5M+</div>
+                        <div class="mt-2 text-gray-500">Financed Projects</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="services-section-preview">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Our Core Services</h2>
-                    <p class="section-subtitle">Comprehensive solutions for all your real estate and financial needs.</p>
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Core Services</h2>
+                    <p class="mt-4 text-lg text-gray-600">Comprehensive solutions for all your real estate and financial needs.</p>
                 </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-content">
-                            <div class="service-icon"><i class="fas fa-home"></i></div>
-                            <h3 class="service-title">Property Acquisition</h3>
-                            <p class="service-description">Find your perfect property with our extensive listings and expert guidance.</p>
-                        </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-transform duration-300">
+                        <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-home"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Property Acquisition</h3>
+                        <p class="text-gray-600">Find your perfect property with our extensive listings and expert guidance.</p>
                     </div>
-                    <div class="service-card">
-                        <div class="service-content">
-                            <div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                            <h3 class="service-title">Project Financing</h3>
-                            <p class="service-description">Flexible financing solutions for your property development and investment needs.</p>
-                        </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-transform duration-300">
+                        <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-hand-holding-usd"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Project Financing</h3>
+                        <p class="text-gray-600">Flexible financing solutions for your property development and investment needs.</p>
                     </div>
-                    <div class="service-card">
-                        <div class="service-content">
-                            <div class="service-icon"><i class="fas fa-file-contract"></i></div>
-                            <h3 class="service-title">Property Management</h3>
-                            <p class="service-description">Professional management services for rental properties and commercial real estate.</p>
-                        </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-transform duration-300">
+                        <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-file-contract"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Property Management</h3>
+                        <p class="text-gray-600">Professional management services for rental properties and commercial real estate.</p>
                     </div>
                 </div>
-                <div class="view-all">
-                    <a href="services.html" class="btn btn-primary">View All Services</a>
+                <div class="text-center mt-12">
+                    <a href="services.html" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-md text-lg hover:bg-blue-700 transition duration-300">View All Services</a>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
-                        <div class="footer-logo-text">
-                            <h3>Leaf-Note</h3>
-                            <p>Financial Services & Real Estate Ltd</p>
+    <footer class="bg-slate-800 text-slate-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-4">
+                        <img src="images/properties/Logo.webp" alt="Leaf-Note Logo" class="h-12 w-12">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Leaf-Note</h3>
+                            <p class="text-xs text-slate-400">Financial Services & Real Estate Ltd</p>
                         </div>
-                    </div>
-                    <p class="footer-about-text">Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
+                    </a>
+                    <p class="text-sm">Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
                 </div>
-                <div class="footer-links-container">
-                    <h4 class="footer-heading">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="index.html">Home</a></li>
-                        <li class="footer-link"><a href="about.html">About Us</a></li>
-                        <li class="footer-link"><a href="services.html">Services</a></li>
-                        <li class="footer-link"><a href="properties.html">Properties</a></li>
-                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="properties.html" class="hover:text-white">Properties</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
-                    <h4 class="footer-heading">Contact Us</h4>
-                    <p>Mpelembe House, 2nd Floor, R207A, Ndola</p>
-                    <p>+260 95 586 9020</p>
-                    <p>info@leaf-note.com</p>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Mpelembe House, 2nd Floor, R207A, Ndola</li>
+                        <li>+260 95 586 9020</li>
+                        <li>info@leaf-note.com</li>
+                    </ul>
                 </div>
-                <div class="footer-social-container">
-                    <h4 class="footer-heading">Follow Us</h4>
-                    <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" aria-label="Facebook" class="text-xl hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/260955869020" aria-label="WhatsApp" class="text-xl hover:text-white"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p class="copyright">&copy; 2024 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
+            <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-400">
+                <p>&copy; 2025 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Simple script for mobile menu toggle
+        document.getElementById('menuBtn').addEventListener('click', function () {
+            var mobileMenu = document.getElementById('mobileMenu');
+            var isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
